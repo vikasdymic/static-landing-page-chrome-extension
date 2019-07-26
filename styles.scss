@@ -19,6 +19,26 @@ $font-dark: rgb(52, 60, 64);
   justify-content: center;
 }
 
+// Media Query Widths
+$phone-only: 500px;
+$tablet-portrait: 768px;
+$tablet-landscape: 992px;
+$desktop-small: 1280px;
+
+// Use this for media queries within classes
+// (no separate media queries)
+@mixin breakpoint($size) {
+  @if $size == phone-only {
+    @media (max-width: $phone-only) { @content; }
+  } @else if $size == tablet-portrait {
+    @media (max-width: $tablet-portrait) { @content; }
+  } @else if $size == tablet-landscape {
+    @media (max-width: $tablet-landscape) { @content; }
+  } @else if $size == desktop-small {
+    @media (max-width: $desktop-small) { @content; }
+  }
+}
+
 body, html {
   box-sizing: border-box;
   margin: 0;
@@ -53,6 +73,22 @@ body {
     'disclaimer disclaimer disclaimer' auto
     / 1fr 1fr 1fr;
   box-shadow: 0 0 15px rgb(163, 131, 161);
+  @include breakpoint(tablet-landscape) {
+    width: 700px;
+  }
+  @include breakpoint(tablet-portrait) {
+    width: 450px;
+  }
+  @include breakpoint(phone-only) {
+    width: 250px;
+    grid-template:
+      'header' auto
+      'title' auto
+      'list' auto
+      'continue' auto
+      'disclaimer' auto
+      / 100%;
+  }
 }
 
 .pdftoolkit__header {
@@ -62,6 +98,12 @@ body {
         'heading description' auto
         / auto auto;
   margin: 0 0 2rem 0;
+  @include breakpoint(tablet-portrait) {
+    grid-template:
+        'heading' auto
+        'description' auto
+        / 1fr;
+  }
 }
 
 .pdftoolkit__header__heading {
@@ -71,6 +113,16 @@ body {
   align-self: center;
   justify-self: flex-start;
   position: relative;
+  @include breakpoint(tablet-portrait) {
+    align-self: center;
+    justify-self: center;
+    margin-bottom: 1rem;
+    margin-left: 5rem;
+  }
+  @include breakpoint(phone-only) {
+    font-size: 1.85rem;
+    margin-left: 3rem;
+  }
 }
 
 .pdftoolkit__header__heading::before {
@@ -82,6 +134,11 @@ body {
   left: -65px;
   width: 50px;
   height: 50px;
+  @include breakpoint(phone-only) {
+    width: 25px;
+    height: 25px;
+    left: -30px;
+  }
 }
 
 .pdftoolkit__header__description {
@@ -91,6 +148,14 @@ body {
   margin: 0;
   align-self: center;
   justify-self: center;
+  @include breakpoint(tablet-portrait) {
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+  }
+  @include breakpoint(phone-only) {
+    font-size: 1.15rem;
+  }
 }
 
 .pdftoolkit__title {
@@ -100,6 +165,13 @@ body {
 .pdftoolkit__title__heading {
   font-size: 2.0rem;
   margin: 0 2.5rem 2rem 0;
+  @include breakpoint(phone-only) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 0 2rem 0;
+  }
 }
 
 .pdftoolkit__title__heading__doctopdf,
@@ -115,6 +187,9 @@ body {
   height: 35px;
   top: 7px;
   margin: 0 3rem 0 3.5rem;
+  @include breakpoint(phone-only) {
+    margin: 0;
+  }
 }
 
 .pdftoolkit__title__heading__doctopdf::before {
@@ -146,6 +221,9 @@ body {
   height: 35px;
   top: 7px;
   margin: 0 0 0 3rem;
+  @include breakpoint(phone-only) {
+    margin: 0;
+  }
 }
 
 .pdftoolkit__title__heading__pdftodoc::before {
@@ -182,6 +260,11 @@ body {
   padding: 0 0 2rem 0;
   font-size: 1.5rem;
   color: $font-light;
+  @include breakpoint(phone-only) {
+    font-size: 1.25rem;
+    @include flex-center;
+    flex-direction: column;
+  }
 }
 
 .pdftoolkit__list__item {
@@ -203,6 +286,11 @@ body {
   @include font-display;
   color: white;
   font-size: 3rem;
+  @include breakpoint(phone-only) {
+    font-size: 1.25rem;
+    width: 100%;
+    height: 70px;
+  }
 }
 
 .pdftoolkit__fineprint {
