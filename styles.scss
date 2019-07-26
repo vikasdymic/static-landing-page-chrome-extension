@@ -43,7 +43,7 @@ body, html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 100vh;
+  min-height: 100vh;
   @include font-body;
   @include flex-center;
   text-align: center;
